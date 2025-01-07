@@ -1,26 +1,24 @@
-# try-catch-test
+# Inline specifier test
 
-## Project structure
+# Introduction
+From docs: *If a function has inline specifier, its code is actually substituted in every place where the function is called*.
 
--   `contracts` - source code of all the smart contracts of the project and their dependencies.
--   `wrappers` - wrapper classes (implementing `Contract` from ton-core) for the contracts, including any [de]serialization primitives and compilation functions.
--   `tests` - tests for the contracts.
--   `scripts` - scripts used by the project, mainly the deployment scripts.
+But if I create a variable with a **function with inline specifier** value and call it, then compute fee will be the same as if I call function without **inline specifier**.
+Is it bug or did i misunderstand something?
 
-## How to use
+## Description
+I have two smart contracts:
+1. With the **inline specifier**:
+![sc_with_inline_specifier](https://github.com/user-attachments/assets/d9b71819-2840-4017-b769-a701abd31950)
+2. Without the **inline specifier**:
+![sc_without_inline_specifier](https://github.com/user-attachments/assets/3abb8500-cf59-49cb-aadb-fd965259c797)
 
-### Build
+Then I ran these <a href="https://github.com/domikedos/func-inline-test/tree/master/tests">tests</a> and this is what I got:
+1. With the **inline specifier**:
+![fees_with_inline_specifier](https://github.com/user-attachments/assets/88027be4-d2e1-43cb-9f91-a197c50c0de1)
+2. Without the **inline specifier**:
+![fees_without_inline_specifier](https://github.com/user-attachments/assets/9328208b-e32c-4ef4-bc24-18cafa08924f)
 
-`npx blueprint build` or `yarn blueprint build`
+## Results
 
-### Test
-
-`npx blueprint test` or `yarn blueprint test`
-
-### Deploy or run another script
-
-`npx blueprint run` or `yarn blueprint run`
-
-### Add a new contract
-
-`npx blueprint create ContractName` or `yarn blueprint create ContractName`
+As we see, the compute fees are completely the same. Does it mean, that TVM doesn't optimize function call?
