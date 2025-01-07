@@ -1,0 +1,16 @@
+#include "imports/stdlib.fc";
+
+global int store;
+
+int test() inline {
+    randomize_lt();
+    int a = 5;
+    int b = 7 + a;
+
+    return b + 9;
+}
+
+() recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
+    var someFunc = test;
+    store = someFunc();
+}

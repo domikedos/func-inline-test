@@ -1,0 +1,2 @@
+int random() impure asm "RANDU256";
+() randomize_lt() impure asm "LTIME" "ADDRAND";
